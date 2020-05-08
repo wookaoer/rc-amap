@@ -24,8 +24,11 @@
     ]
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^0.0.1",
+    "@amap/amap-jsapi-types": "^0.0.4",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.0.5",
+    "constate": "^2.0.0",
     "dumi": "^1.0.6",
     "father-build": "^1.17.2",
     "lint-staged": "^10.0.7",

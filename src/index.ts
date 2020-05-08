@@ -1,3 +1,3 @@
-import ReactMap from './core/map'
+import ReactAMap from './core/index'
 
-export default ReactMap
+export default ReactAMap
