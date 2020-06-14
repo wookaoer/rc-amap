@@ -1,29 +1,32 @@
-import useMap from "@/hooks/useMap";
-import React, {FC, useEffect, useRef} from 'react';
-
+import useMap from '../hooks/useMap';
+import React, { FC, useEffect, useRef } from 'react';
+import classNames from 'classnames';
 import mapStyle from './map.less';
-import {MapinitProps} from "@/types/map";
+import { MapinitProps } from '@/types/map';
 
 const [, useMapContext] = useMap;
 
 const Map: FC<MapinitProps> = props => {
-
+  const { wrapperClassName, containerClassName, events, ...mapOptions } = props;
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const {AMap, map, setMap} = useMapContext();
+  const { AMap, map, setMap } = useMapContext();
 
   useEffect(() => {
     if (AMap && !map) {
-      setMap(new AMap.Map(mapRef.current))
+      // @ts-ignore
+      setMap(new AMap.Map(mapRef.current, mapOptions));
     }
-  }, [AMap])
+  }, [AMap]);
 
   return (
-    <div className={mapStyle['map-wrapper']}>
-      <div className={mapStyle['map-container']} ref={mapRef} />
+    <div className={classNames(mapStyle['map-wrapper'], wrapperClassName)}>
+      <div
+        className={classNames(mapStyle['map-container'], containerClassName)}
+        ref={mapRef}
+      />
       {map && props.children}
     </div>
-  )
-
+  );
 };
 
-export default Map
+export default Map;

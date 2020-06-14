@@ -1,8 +1,10 @@
-import "@amap/amap-jsapi-types";
+import '@amap/amap-jsapi-types';
 
 export interface MapinitProps extends Partial<AMap.MapOptions> {
+  wrapperClassName?: string;
+  containerClassName?: string;
   events?: {
-    [key in string]: () => void
+    [key in string]: () => void;
   };
 }
 

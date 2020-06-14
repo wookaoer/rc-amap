@@ -1,28 +1,24 @@
-import React, {useEffect, useState} from "react";
-import constate from "constate";
-import {load} from "@/utils/loader";
+import React, { useEffect, useState } from 'react';
+import constate from 'constate';
 
-import "@amap/amap-jsapi-types";
-import {MapProps} from "@/types/map";
+import '@amap/amap-jsapi-types';
+import { MapProps } from '@/types/map';
+import { useLoader } from '../hooks/useLoader';
 
 function useMap(props: MapProps) {
-  const {mapKey, version, plugins} = props;
+  const { mapKey, version, plugins } = props;
   const [map, setMap] = useState<AMap.Map | null>(null);
-  const [AMap, setAMap] = useState<any>(null);
+  const { AMap } = useLoader({
+    key: mapKey,
+    version,
+    plugins,
+  });
 
-  useEffect( () => {
-    load({
-      key: mapKey,
-      version,
-      plugins
-    }).then((AMap) => {
-      setAMap(AMap)
-    }).catch(err => {
-      console.log(err);
-    });
-  }, []);
-
-  return {AMap, map, setMap}
+  return {
+    map,
+    AMap,
+    setMap,
+  };
 }
 
-export default constate(useMap)
+export default constate(useMap);
